@@ -17,4 +17,4 @@ Instructions
 1) Open up an instance of SQL Server via SQL Server Management Studio. 
 2) Create the tables in image below with the same relationships.
 
-![alt text](https://drive.google.com/file/d/0B8VV2H58aDpfbFIwNUlUbW50U3c)
+![alt text](https://github.com/harrisonjardine/SmartHomeAPI/blob/master/DatabaseStructure.PNG)

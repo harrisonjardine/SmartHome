@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.25420.1
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FYP_SmartHomeWCF", "FYP_SmartHomeWCF\FYP_SmartHomeWCF.csproj", "{F080ED32-C82E-4304-BDBA-2A146D637088}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ClientTester", "ClientTester\ClientTester.csproj", "{16F01431-8F55-4DA5-8F3D-C972C3FA8234}"
+	ProjectSection(ProjectDependencies) = postProject
+		{F080ED32-C82E-4304-BDBA-2A146D637088} = {F080ED32-C82E-4304-BDBA-2A146D637088}
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{F080ED32-C82E-4304-BDBA-2A146D637088}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F080ED32-C82E-4304-BDBA-2A146D637088}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F080ED32-C82E-4304-BDBA-2A146D637088}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F080ED32-C82E-4304-BDBA-2A146D637088}.Release|Any CPU.Build.0 = Release|Any CPU
+		{16F01431-8F55-4DA5-8F3D-C972C3FA8234}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{16F01431-8F55-4DA5-8F3D-C972C3FA8234}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{16F01431-8F55-4DA5-8F3D-C972C3FA8234}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{16F01431-8F55-4DA5-8F3D-C972C3FA8234}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

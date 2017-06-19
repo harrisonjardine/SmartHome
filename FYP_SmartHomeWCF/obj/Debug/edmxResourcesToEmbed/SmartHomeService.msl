@@ -1,0 +1,92 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="db_hj13aajModelStoreContainer" CdmEntityContainer="db_hj13aajEntities">
+    <EntitySetMapping Name="tblHouses">
+      <EntityTypeMapping TypeName="db_hj13aajModel.tblHouse">
+        <MappingFragment StoreEntitySet="tblHouse">
+          <ScalarProperty Name="HouseGUID" ColumnName="HouseGUID" />
+          <ScalarProperty Name="HouseName" ColumnName="HouseName" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tblHouseOwners">
+      <EntityTypeMapping TypeName="db_hj13aajModel.tblHouseOwner">
+        <MappingFragment StoreEntitySet="tblHouseOwners">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="HouseGUID" ColumnName="HouseGUID" />
+          <ScalarProperty Name="UserGUID" ColumnName="UserGUID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tblObjectTypes">
+      <EntityTypeMapping TypeName="db_hj13aajModel.tblObjectType">
+        <MappingFragment StoreEntitySet="tblObjectTypes">
+          <ScalarProperty Name="ObjectTypeGUID" ColumnName="ObjectTypeGUID" />
+          <ScalarProperty Name="ObjectName" ColumnName="ObjectName" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tblRoomObjects">
+      <EntityTypeMapping TypeName="db_hj13aajModel.tblRoomObject">
+        <MappingFragment StoreEntitySet="tblRoomObjects">
+          <ScalarProperty Name="HouseGUID" ColumnName="HouseGUID" />
+          <ScalarProperty Name="ObjectGUID" ColumnName="ObjectGUID" />
+          <ScalarProperty Name="RoomGUID" ColumnName="RoomGUID" />
+          <ScalarProperty Name="ObjectTypeGUID" ColumnName="ObjectTypeGUID" />
+          <ScalarProperty Name="ObjectDescription" ColumnName="ObjectDescription" />
+          <ScalarProperty Name="ObjectState" ColumnName="ObjectState" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tblRoomOwners">
+      <EntityTypeMapping TypeName="db_hj13aajModel.tblRoomOwner">
+        <MappingFragment StoreEntitySet="tblRoomOwners">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="RoomGUID" ColumnName="RoomGUID" />
+          <ScalarProperty Name="UserGUID" ColumnName="UserGUID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tblRooms">
+      <EntityTypeMapping TypeName="db_hj13aajModel.tblRoom">
+        <MappingFragment StoreEntitySet="tblRooms">
+          <ScalarProperty Name="RoomGUID" ColumnName="RoomGUID" />
+          <ScalarProperty Name="HouseGUID" ColumnName="HouseGUID" />
+          <ScalarProperty Name="RoomName" ColumnName="RoomName" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tblUsers">
+      <EntityTypeMapping TypeName="db_hj13aajModel.tblUser">
+        <MappingFragment StoreEntitySet="tblUsers">
+          <ScalarProperty Name="UserGUID" ColumnName="UserGUID" />
+          <ScalarProperty Name="UserPasswordHash" ColumnName="UserPasswordHash" />
+          <ScalarProperty Name="UserName" ColumnName="UserName" />
+          <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+          <ScalarProperty Name="LastName" ColumnName="LastName" />
+          <ScalarProperty Name="EmailAddress" ColumnName="EmailAddress" />
+          <ScalarProperty Name="EmailVerified" ColumnName="EmailVerified" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <FunctionImportMapping FunctionImportName="usp_AddHouse" FunctionName="db_hj13aajModel.Store.usp_AddHouse" />
+    <FunctionImportMapping FunctionImportName="usp_AddObject" FunctionName="db_hj13aajModel.Store.usp_AddObject" />
+    <FunctionImportMapping FunctionImportName="usp_AddObjectToRoom" FunctionName="db_hj13aajModel.Store.usp_AddObjectToRoom" />
+    <FunctionImportMapping FunctionImportName="usp_AddObjectType" FunctionName="db_hj13aajModel.Store.usp_AddObjectType" />
+    <FunctionImportMapping FunctionImportName="usp_AddOwnerToHouse" FunctionName="db_hj13aajModel.Store.usp_AddOwnerToHouse" />
+    <FunctionImportMapping FunctionImportName="usp_AddOwnerToRoom" FunctionName="db_hj13aajModel.Store.usp_AddOwnerToRoom" />
+    <FunctionImportMapping FunctionImportName="usp_AddRoom" FunctionName="db_hj13aajModel.Store.usp_AddRoom" />
+    <FunctionImportMapping FunctionImportName="usp_AddUser" FunctionName="db_hj13aajModel.Store.usp_AddUser" />
+    <FunctionImportMapping FunctionImportName="usp_EditHouse" FunctionName="db_hj13aajModel.Store.usp_EditHouse" />
+    <FunctionImportMapping FunctionImportName="usp_EditObjectType" FunctionName="db_hj13aajModel.Store.usp_EditObjectType" />
+    <FunctionImportMapping FunctionImportName="usp_EditRoomDetails" FunctionName="db_hj13aajModel.Store.usp_EditRoomDetails" />
+    <FunctionImportMapping FunctionImportName="usp_EditRoomsHouse" FunctionName="db_hj13aajModel.Store.usp_EditRoomsHouse" />
+    <FunctionImportMapping FunctionImportName="usp_EditUserDetails" FunctionName="db_hj13aajModel.Store.usp_EditUserDetails" />
+    <FunctionImportMapping FunctionImportName="usp_EditUserPassword" FunctionName="db_hj13aajModel.Store.usp_EditUserPassword" />
+    <FunctionImportMapping FunctionImportName="usp_RemoveOwnerFromHouse" FunctionName="db_hj13aajModel.Store.usp_RemoveOwnerFromHouse" />
+    <FunctionImportMapping FunctionImportName="usp_RemoveOwnerFromRoom" FunctionName="db_hj13aajModel.Store.usp_RemoveOwnerFromRoom" />
+    <FunctionImportMapping FunctionImportName="usp_UserLogin" FunctionName="db_hj13aajModel.Store.usp_UserLogin" />
+    <FunctionImportMapping FunctionImportName="usp_VerifyEmailAddress" FunctionName="db_hj13aajModel.Store.usp_VerifyEmailAddress" />
+    <FunctionImportMapping FunctionImportName="usp_AddTypeToObject" FunctionName="db_hj13aajModel.Store.usp_AddTypeToObject" />
+  </EntityContainerMapping>
+</Mapping>

@@ -1,0 +1,328 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="db_hj13aajModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="tblHouse">
+    <Key>
+      <PropertyRef Name="HouseGUID" />
+    </Key>
+    <Property Name="HouseGUID" Type="Guid" Nullable="false" />
+    <Property Name="HouseName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="tblHouseOwners" Relationship="Self.FK__tblHouseO__House__1ED998B2" FromRole="tblHouse" ToRole="tblHouseOwners" />
+    <NavigationProperty Name="tblRooms" Relationship="Self.FK__tblRooms__HouseG__21B6055D" FromRole="tblHouse" ToRole="tblRooms" />
+    <NavigationProperty Name="tblRoomObjects" Relationship="db_hj13aajModel.FK__tblRoomOb__House__36B12243" FromRole="tblHouse" ToRole="tblRoomObject" />
+  </EntityType>
+  <EntityType Name="tblHouseOwner">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="HouseGUID" Type="Guid" />
+    <Property Name="UserGUID" Type="Guid" />
+    <NavigationProperty Name="tblHouse" Relationship="Self.FK__tblHouseO__House__1ED998B2" FromRole="tblHouseOwners" ToRole="tblHouse" />
+    <NavigationProperty Name="tblUser" Relationship="Self.FK__tblHouseO__UserG__1CF15040" FromRole="tblHouseOwners" ToRole="tblUsers" />
+  </EntityType>
+  <EntityType Name="tblObjectType">
+    <Key>
+      <PropertyRef Name="ObjectTypeGUID" />
+    </Key>
+    <Property Name="ObjectTypeGUID" Type="Guid" Nullable="false" />
+    <Property Name="ObjectName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="tblRoomObjects" Relationship="Self.FK_tblRoomObjects_tblObjectTypes" FromRole="tblObjectTypes" ToRole="tblRoomObjects" />
+  </EntityType>
+  <EntityType Name="tblRoomObject">
+    <Key>
+      <PropertyRef Name="ObjectGUID" />
+    </Key>
+    <Property Name="ObjectGUID" Type="Guid" Nullable="false" />
+    <Property Name="RoomGUID" Type="Guid" />
+    <Property Name="ObjectTypeGUID" Type="Guid" />
+    <Property Name="ObjectDescription" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="ObjectState" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="tblObjectType" Relationship="Self.FK_tblRoomObjects_tblObjectTypes" FromRole="tblRoomObjects" ToRole="tblObjectTypes" />
+    <NavigationProperty Name="tblRoom" Relationship="Self.FK_tblRoomObjects_tblRooms" FromRole="tblRoomObjects" ToRole="tblRooms" />
+    <Property Name="HouseGUID" Type="Guid" />
+    <NavigationProperty Name="tblHouse" Relationship="db_hj13aajModel.FK__tblRoomOb__House__36B12243" FromRole="tblRoomObject" ToRole="tblHouse" />
+  </EntityType>
+  <EntityType Name="tblRoomOwner">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="RoomGUID" Type="Guid" />
+    <Property Name="UserGUID" Type="Guid" />
+    <NavigationProperty Name="tblRoom" Relationship="Self.FK__tblRoomOw__RoomG__20C1E124" FromRole="tblRoomOwners" ToRole="tblRooms" />
+    <NavigationProperty Name="tblUser" Relationship="Self.FK__tblRoomOw__UserG__1FCDBCEB" FromRole="tblRoomOwners" ToRole="tblUsers" />
+  </EntityType>
+  <EntityType Name="tblRoom">
+    <Key>
+      <PropertyRef Name="RoomGUID" />
+    </Key>
+    <Property Name="RoomGUID" Type="Guid" Nullable="false" />
+    <Property Name="HouseGUID" Type="Guid" />
+    <Property Name="RoomName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="tblHouse" Relationship="Self.FK__tblRooms__HouseG__21B6055D" FromRole="tblRooms" ToRole="tblHouse" />
+    <NavigationProperty Name="tblRoomObjects" Relationship="Self.FK_tblRoomObjects_tblRooms" FromRole="tblRooms" ToRole="tblRoomObjects" />
+    <NavigationProperty Name="tblRoomOwners" Relationship="Self.FK__tblRoomOw__RoomG__20C1E124" FromRole="tblRooms" ToRole="tblRoomOwners" />
+  </EntityType>
+  <EntityType Name="tblUser">
+    <Key>
+      <PropertyRef Name="UserGUID" />
+    </Key>
+    <Property Name="UserGUID" Type="Guid" Nullable="false" />
+    <Property Name="UserPasswordHash" Type="Binary" MaxLength="64" FixedLength="true" Nullable="false" />
+    <Property Name="UserName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="FirstName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="LastName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="EmailAddress" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="EmailVerified" Type="Boolean" />
+    <NavigationProperty Name="tblHouseOwners" Relationship="Self.FK__tblHouseO__UserG__1CF15040" FromRole="tblUsers" ToRole="tblHouseOwners" />
+    <NavigationProperty Name="tblRoomOwners" Relationship="Self.FK__tblRoomOw__UserG__1FCDBCEB" FromRole="tblUsers" ToRole="tblRoomOwners" />
+  </EntityType>
+  <Association Name="FK__tblHouseO__House__1ED998B2">
+    <End Role="tblHouse" Type="Self.tblHouse" Multiplicity="0..1" />
+    <End Role="tblHouseOwners" Type="Self.tblHouseOwner" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblHouse">
+        <PropertyRef Name="HouseGUID" />
+      </Principal>
+      <Dependent Role="tblHouseOwners">
+        <PropertyRef Name="HouseGUID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__tblRooms__HouseG__21B6055D">
+    <End Role="tblHouse" Type="Self.tblHouse" Multiplicity="0..1" />
+    <End Role="tblRooms" Type="Self.tblRoom" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblHouse">
+        <PropertyRef Name="HouseGUID" />
+      </Principal>
+      <Dependent Role="tblRooms">
+        <PropertyRef Name="HouseGUID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__tblHouseO__UserG__1CF15040">
+    <End Role="tblUsers" Type="Self.tblUser" Multiplicity="0..1" />
+    <End Role="tblHouseOwners" Type="Self.tblHouseOwner" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblUsers">
+        <PropertyRef Name="UserGUID" />
+      </Principal>
+      <Dependent Role="tblHouseOwners">
+        <PropertyRef Name="UserGUID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tblRoomObjects_tblObjectTypes">
+    <End Role="tblObjectTypes" Type="Self.tblObjectType" Multiplicity="0..1" />
+    <End Role="tblRoomObjects" Type="Self.tblRoomObject" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblObjectTypes">
+        <PropertyRef Name="ObjectTypeGUID" />
+      </Principal>
+      <Dependent Role="tblRoomObjects">
+        <PropertyRef Name="ObjectTypeGUID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tblRoomObjects_tblRooms">
+    <End Role="tblRooms" Type="Self.tblRoom" Multiplicity="0..1" />
+    <End Role="tblRoomObjects" Type="Self.tblRoomObject" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblRooms">
+        <PropertyRef Name="RoomGUID" />
+      </Principal>
+      <Dependent Role="tblRoomObjects">
+        <PropertyRef Name="RoomGUID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__tblRoomOw__RoomG__20C1E124">
+    <End Role="tblRooms" Type="Self.tblRoom" Multiplicity="0..1" />
+    <End Role="tblRoomOwners" Type="Self.tblRoomOwner" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblRooms">
+        <PropertyRef Name="RoomGUID" />
+      </Principal>
+      <Dependent Role="tblRoomOwners">
+        <PropertyRef Name="RoomGUID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__tblRoomOw__UserG__1FCDBCEB">
+    <End Role="tblUsers" Type="Self.tblUser" Multiplicity="0..1" />
+    <End Role="tblRoomOwners" Type="Self.tblRoomOwner" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblUsers">
+        <PropertyRef Name="UserGUID" />
+      </Principal>
+      <Dependent Role="tblRoomOwners">
+        <PropertyRef Name="UserGUID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="db_hj13aajEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="tblHouses" EntityType="Self.tblHouse" />
+    <EntitySet Name="tblHouseOwners" EntityType="Self.tblHouseOwner" />
+    <EntitySet Name="tblObjectTypes" EntityType="Self.tblObjectType" />
+    <EntitySet Name="tblRoomObjects" EntityType="Self.tblRoomObject" />
+    <EntitySet Name="tblRoomOwners" EntityType="Self.tblRoomOwner" />
+    <EntitySet Name="tblRooms" EntityType="Self.tblRoom" />
+    <EntitySet Name="tblUsers" EntityType="Self.tblUser" />
+    <AssociationSet Name="FK__tblHouseO__House__1ED998B2" Association="Self.FK__tblHouseO__House__1ED998B2">
+      <End Role="tblHouse" EntitySet="tblHouses" />
+      <End Role="tblHouseOwners" EntitySet="tblHouseOwners" />
+    </AssociationSet>
+    <AssociationSet Name="FK__tblRooms__HouseG__21B6055D" Association="Self.FK__tblRooms__HouseG__21B6055D">
+      <End Role="tblHouse" EntitySet="tblHouses" />
+      <End Role="tblRooms" EntitySet="tblRooms" />
+    </AssociationSet>
+    <AssociationSet Name="FK__tblHouseO__UserG__1CF15040" Association="Self.FK__tblHouseO__UserG__1CF15040">
+      <End Role="tblUsers" EntitySet="tblUsers" />
+      <End Role="tblHouseOwners" EntitySet="tblHouseOwners" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tblRoomObjects_tblObjectTypes" Association="Self.FK_tblRoomObjects_tblObjectTypes">
+      <End Role="tblObjectTypes" EntitySet="tblObjectTypes" />
+      <End Role="tblRoomObjects" EntitySet="tblRoomObjects" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tblRoomObjects_tblRooms" Association="Self.FK_tblRoomObjects_tblRooms">
+      <End Role="tblRooms" EntitySet="tblRooms" />
+      <End Role="tblRoomObjects" EntitySet="tblRoomObjects" />
+    </AssociationSet>
+    <AssociationSet Name="FK__tblRoomOw__RoomG__20C1E124" Association="Self.FK__tblRoomOw__RoomG__20C1E124">
+      <End Role="tblRooms" EntitySet="tblRooms" />
+      <End Role="tblRoomOwners" EntitySet="tblRoomOwners" />
+    </AssociationSet>
+    <AssociationSet Name="FK__tblRoomOw__UserG__1FCDBCEB" Association="Self.FK__tblRoomOw__UserG__1FCDBCEB">
+      <End Role="tblUsers" EntitySet="tblUsers" />
+      <End Role="tblRoomOwners" EntitySet="tblRoomOwners" />
+    </AssociationSet>
+    <FunctionImport Name="usp_AddHouse">
+      <Parameter Name="HouseGUID" Mode="In" Type="String" />
+      <Parameter Name="HouseName" Mode="In" Type="String" />
+      <Parameter Name="responseMessage" Mode="InOut" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="usp_AddObject">
+      <Parameter Name="ObjectGUID" Mode="In" Type="String" />
+      <Parameter Name="HouseGUID" Mode="In" Type="String" />
+      <Parameter Name="ObjectDescription" Mode="In" Type="String" />
+      <Parameter Name="ObjectState" Mode="In" Type="String" />
+      <Parameter Name="responseMessage" Mode="InOut" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="usp_AddObjectToRoom">
+      <Parameter Name="ObjectGUID" Mode="In" Type="String" />
+      <Parameter Name="RoomGUID" Mode="In" Type="String" />
+      <Parameter Name="ObjectDescription" Mode="In" Type="String" />
+      <Parameter Name="responseMessage" Mode="InOut" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="usp_AddObjectType">
+      <Parameter Name="ObjectTypeGUID" Mode="In" Type="String" />
+      <Parameter Name="ObjectName" Mode="In" Type="String" />
+      <Parameter Name="responseMessage" Mode="InOut" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="usp_AddOwnerToHouse">
+      <Parameter Name="UserGUID" Mode="In" Type="String" />
+      <Parameter Name="HouseGUID" Mode="In" Type="String" />
+      <Parameter Name="responseMessage" Mode="InOut" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="usp_AddOwnerToRoom">
+      <Parameter Name="UserGUID" Mode="In" Type="String" />
+      <Parameter Name="RoomGUID" Mode="In" Type="String" />
+      <Parameter Name="responseMessage" Mode="InOut" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="usp_AddRoom">
+      <Parameter Name="RoomGUID" Mode="In" Type="String" />
+      <Parameter Name="HouseGUID" Mode="In" Type="String" />
+      <Parameter Name="RoomName" Mode="In" Type="String" />
+      <Parameter Name="responseMessage" Mode="InOut" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="usp_AddUser">
+      <Parameter Name="UserGUID" Mode="In" Type="String" />
+      <Parameter Name="UserName" Mode="In" Type="String" />
+      <Parameter Name="UserPassword" Mode="In" Type="String" />
+      <Parameter Name="FirstName" Mode="In" Type="String" />
+      <Parameter Name="LastName" Mode="In" Type="String" />
+      <Parameter Name="EmailAddress" Mode="In" Type="String" />
+      <Parameter Name="responseMessage" Mode="InOut" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="usp_EditHouse">
+      <Parameter Name="HouseGUID" Mode="In" Type="String" />
+      <Parameter Name="HouseName" Mode="In" Type="String" />
+      <Parameter Name="responseMessage" Mode="InOut" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="usp_EditObjectType">
+      <Parameter Name="ObjectTypeGUID" Mode="In" Type="String" />
+      <Parameter Name="ObjectName" Mode="In" Type="String" />
+      <Parameter Name="responseMessage" Mode="InOut" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="usp_EditRoomDetails">
+      <Parameter Name="RoomGUID" Mode="In" Type="String" />
+      <Parameter Name="RoomName" Mode="In" Type="String" />
+      <Parameter Name="responseMessage" Mode="InOut" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="usp_EditRoomsHouse">
+      <Parameter Name="RoomGUID" Mode="In" Type="String" />
+      <Parameter Name="HouseGUID" Mode="In" Type="String" />
+      <Parameter Name="responseMessage" Mode="InOut" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="usp_EditUserDetails">
+      <Parameter Name="UserGUID" Mode="In" Type="String" />
+      <Parameter Name="UserName" Mode="In" Type="String" />
+      <Parameter Name="FirstName" Mode="In" Type="String" />
+      <Parameter Name="LastName" Mode="In" Type="String" />
+      <Parameter Name="EmailAddress" Mode="In" Type="String" />
+      <Parameter Name="responseMessage" Mode="InOut" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="usp_EditUserPassword">
+      <Parameter Name="UserGUID" Mode="In" Type="String" />
+      <Parameter Name="UserPassword" Mode="In" Type="String" />
+      <Parameter Name="responseMessage" Mode="InOut" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="usp_RemoveOwnerFromHouse">
+      <Parameter Name="UserGUID" Mode="In" Type="String" />
+      <Parameter Name="HouseGUID" Mode="In" Type="String" />
+      <Parameter Name="responseMessage" Mode="InOut" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="usp_RemoveOwnerFromRoom">
+      <Parameter Name="UserGUID" Mode="In" Type="String" />
+      <Parameter Name="RoomGUID" Mode="In" Type="String" />
+      <Parameter Name="responseMessage" Mode="InOut" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="usp_UserLogin">
+      <Parameter Name="UserName" Mode="In" Type="String" />
+      <Parameter Name="UserPassword" Mode="In" Type="String" />
+      <Parameter Name="responseMessage" Mode="InOut" Type="String" />
+      <Parameter Name="UserGuid" Mode="InOut" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="usp_VerifyEmailAddress">
+      <Parameter Name="UserGUID" Mode="In" Type="String" />
+      <Parameter Name="responseMessage" Mode="InOut" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="usp_UserAdminHouse">
+      <Parameter Name="UserGuid" Mode="In" Type="String" />
+      <Parameter Name="HouseGuid" Mode="In" Type="String" />
+      <Parameter Name="Permission" Mode="InOut" Type="Boolean" />
+    </FunctionImport>
+    <AssociationSet Name="FK__tblRoomOb__House__36B12243" Association="db_hj13aajModel.FK__tblRoomOb__House__36B12243">
+      <End Role="tblHouse" EntitySet="tblHouses" />
+      <End Role="tblRoomObject" EntitySet="tblRoomObjects" />
+    </AssociationSet>
+    <FunctionImport Name="usp_AddTypeToObject">
+      <Parameter Name="ObjectGUID" Mode="In" Type="String" />
+      <Parameter Name="ObjectTypeGUID" Mode="In" Type="String" />
+      <Parameter Name="responseMessage" Mode="InOut" Type="String" />
+    </FunctionImport>
+  </EntityContainer>
+  <Association Name="FK__tblRoomOb__House__36B12243">
+    <End Type="db_hj13aajModel.tblHouse" Role="tblHouse" Multiplicity="0..1" />
+    <End Type="db_hj13aajModel.tblRoomObject" Role="tblRoomObject" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblHouse">
+        <PropertyRef Name="HouseGUID" />
+      </Principal>
+      <Dependent Role="tblRoomObject">
+        <PropertyRef Name="HouseGUID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema>

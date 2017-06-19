@@ -1,0 +1,307 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="db_hj13aajModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="tblHouse">
+    <Key>
+      <PropertyRef Name="HouseGUID" />
+    </Key>
+    <Property Name="HouseGUID" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="HouseName" Type="nvarchar(max)" />
+  </EntityType>
+  <EntityType Name="tblHouseOwners">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="HouseGUID" Type="uniqueidentifier" />
+    <Property Name="UserGUID" Type="uniqueidentifier" />
+  </EntityType>
+  <EntityType Name="tblObjectTypes">
+    <Key>
+      <PropertyRef Name="ObjectTypeGUID" />
+    </Key>
+    <Property Name="ObjectTypeGUID" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="ObjectName" Type="nvarchar(max)" />
+  </EntityType>
+  <EntityType Name="tblRoomObjects">
+    <Key>
+      <PropertyRef Name="ObjectGUID" />
+    </Key>
+    <Property Name="ObjectGUID" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="RoomGUID" Type="uniqueidentifier" />
+    <Property Name="ObjectTypeGUID" Type="uniqueidentifier" />
+    <Property Name="ObjectDescription" Type="nvarchar(max)" />
+    <Property Name="ObjectState" Type="nvarchar(max)" />
+    <Property Name="HouseGUID" Type="uniqueidentifier" />
+  </EntityType>
+  <EntityType Name="tblRoomOwners">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="RoomGUID" Type="uniqueidentifier" />
+    <Property Name="UserGUID" Type="uniqueidentifier" />
+  </EntityType>
+  <EntityType Name="tblRooms">
+    <Key>
+      <PropertyRef Name="RoomGUID" />
+    </Key>
+    <Property Name="RoomGUID" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="HouseGUID" Type="uniqueidentifier" />
+    <Property Name="RoomName" Type="nvarchar(max)" />
+  </EntityType>
+  <EntityType Name="tblUsers">
+    <Key>
+      <PropertyRef Name="UserGUID" />
+    </Key>
+    <Property Name="UserGUID" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="UserPasswordHash" Type="binary" MaxLength="64" Nullable="false" />
+    <Property Name="UserName" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="FirstName" Type="nvarchar(max)" />
+    <Property Name="LastName" Type="nvarchar(max)" />
+    <Property Name="EmailAddress" Type="nvarchar(max)" />
+    <Property Name="EmailVerified" Type="bit" />
+  </EntityType>
+  <Association Name="FK__tblHouseO__House__1ED998B2">
+    <End Role="tblHouse" Type="Self.tblHouse" Multiplicity="0..1" />
+    <End Role="tblHouseOwners" Type="Self.tblHouseOwners" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblHouse">
+        <PropertyRef Name="HouseGUID" />
+      </Principal>
+      <Dependent Role="tblHouseOwners">
+        <PropertyRef Name="HouseGUID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__tblHouseO__UserG__1CF15040">
+    <End Role="tblUsers" Type="Self.tblUsers" Multiplicity="0..1" />
+    <End Role="tblHouseOwners" Type="Self.tblHouseOwners" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblUsers">
+        <PropertyRef Name="UserGUID" />
+      </Principal>
+      <Dependent Role="tblHouseOwners">
+        <PropertyRef Name="UserGUID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__tblRoomOb__House__36B12243">
+    <End Role="tblHouse" Type="Self.tblHouse" Multiplicity="0..1" />
+    <End Role="tblRoomObjects" Type="Self.tblRoomObjects" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblHouse">
+        <PropertyRef Name="HouseGUID" />
+      </Principal>
+      <Dependent Role="tblRoomObjects">
+        <PropertyRef Name="HouseGUID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__tblRoomOw__RoomG__20C1E124">
+    <End Role="tblRooms" Type="Self.tblRooms" Multiplicity="0..1" />
+    <End Role="tblRoomOwners" Type="Self.tblRoomOwners" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblRooms">
+        <PropertyRef Name="RoomGUID" />
+      </Principal>
+      <Dependent Role="tblRoomOwners">
+        <PropertyRef Name="RoomGUID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__tblRoomOw__UserG__1FCDBCEB">
+    <End Role="tblUsers" Type="Self.tblUsers" Multiplicity="0..1" />
+    <End Role="tblRoomOwners" Type="Self.tblRoomOwners" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblUsers">
+        <PropertyRef Name="UserGUID" />
+      </Principal>
+      <Dependent Role="tblRoomOwners">
+        <PropertyRef Name="UserGUID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__tblRooms__HouseG__21B6055D">
+    <End Role="tblHouse" Type="Self.tblHouse" Multiplicity="0..1" />
+    <End Role="tblRooms" Type="Self.tblRooms" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblHouse">
+        <PropertyRef Name="HouseGUID" />
+      </Principal>
+      <Dependent Role="tblRooms">
+        <PropertyRef Name="HouseGUID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tblRoomObjects_tblObjectTypes">
+    <End Role="tblObjectTypes" Type="Self.tblObjectTypes" Multiplicity="0..1" />
+    <End Role="tblRoomObjects" Type="Self.tblRoomObjects" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblObjectTypes">
+        <PropertyRef Name="ObjectTypeGUID" />
+      </Principal>
+      <Dependent Role="tblRoomObjects">
+        <PropertyRef Name="ObjectTypeGUID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tblRoomObjects_tblRooms">
+    <End Role="tblRooms" Type="Self.tblRooms" Multiplicity="0..1" />
+    <End Role="tblRoomObjects" Type="Self.tblRoomObjects" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblRooms">
+        <PropertyRef Name="RoomGUID" />
+      </Principal>
+      <Dependent Role="tblRoomObjects">
+        <PropertyRef Name="RoomGUID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Function Name="usp_AddHouse" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="HouseGUID" Type="nvarchar(max)" Mode="In" />
+    <Parameter Name="HouseName" Type="nvarchar(max)" Mode="In" />
+    <Parameter Name="responseMessage" Type="nvarchar(max)" Mode="InOut" />
+  </Function>
+  <Function Name="usp_AddObject" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="ObjectGUID" Type="nvarchar(max)" Mode="In" />
+    <Parameter Name="HouseGUID" Type="nvarchar(max)" Mode="In" />
+    <Parameter Name="ObjectDescription" Type="nvarchar(max)" Mode="In" />
+    <Parameter Name="ObjectState" Type="nvarchar(max)" Mode="In" />
+    <Parameter Name="responseMessage" Type="nvarchar(max)" Mode="InOut" />
+  </Function>
+  <Function Name="usp_AddObjectToRoom" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="ObjectGUID" Type="nvarchar(max)" Mode="In" />
+    <Parameter Name="RoomGUID" Type="nvarchar(max)" Mode="In" />
+    <Parameter Name="ObjectDescription" Type="nvarchar(max)" Mode="In" />
+    <Parameter Name="responseMessage" Type="nvarchar(max)" Mode="InOut" />
+  </Function>
+  <Function Name="usp_AddObjectType" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="ObjectTypeGUID" Type="nvarchar(max)" Mode="In" />
+    <Parameter Name="ObjectName" Type="nvarchar(max)" Mode="In" />
+    <Parameter Name="responseMessage" Type="nvarchar(max)" Mode="InOut" />
+  </Function>
+  <Function Name="usp_AddOwnerToHouse" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="UserGUID" Type="nvarchar(max)" Mode="In" />
+    <Parameter Name="HouseGUID" Type="nvarchar(max)" Mode="In" />
+    <Parameter Name="responseMessage" Type="nvarchar(max)" Mode="InOut" />
+  </Function>
+  <Function Name="usp_AddOwnerToRoom" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="UserGUID" Type="nvarchar(max)" Mode="In" />
+    <Parameter Name="RoomGUID" Type="nvarchar(max)" Mode="In" />
+    <Parameter Name="responseMessage" Type="nvarchar(max)" Mode="InOut" />
+  </Function>
+  <Function Name="usp_AddRoom" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="RoomGUID" Type="nvarchar(max)" Mode="In" />
+    <Parameter Name="HouseGUID" Type="nvarchar(max)" Mode="In" />
+    <Parameter Name="RoomName" Type="nvarchar(max)" Mode="In" />
+    <Parameter Name="responseMessage" Type="nvarchar(max)" Mode="InOut" />
+  </Function>
+  <Function Name="usp_AddTypeToObject" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="ObjectGUID" Type="nvarchar(max)" Mode="In" />
+    <Parameter Name="ObjectTypeGUID" Type="nvarchar(max)" Mode="In" />
+    <Parameter Name="responseMessage" Type="nvarchar(max)" Mode="InOut" />
+  </Function>
+  <Function Name="usp_AddUser" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="UserGUID" Type="nvarchar(max)" Mode="In" />
+    <Parameter Name="UserName" Type="nvarchar(max)" Mode="In" />
+    <Parameter Name="UserPassword" Type="nvarchar(max)" Mode="In" />
+    <Parameter Name="FirstName" Type="nvarchar(max)" Mode="In" />
+    <Parameter Name="LastName" Type="nvarchar(max)" Mode="In" />
+    <Parameter Name="EmailAddress" Type="nvarchar(max)" Mode="In" />
+    <Parameter Name="responseMessage" Type="nvarchar(max)" Mode="InOut" />
+  </Function>
+  <Function Name="usp_EditHouse" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="HouseGUID" Type="nvarchar(max)" Mode="In" />
+    <Parameter Name="HouseName" Type="nvarchar(max)" Mode="In" />
+    <Parameter Name="responseMessage" Type="nvarchar(max)" Mode="InOut" />
+  </Function>
+  <Function Name="usp_EditObjectType" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="ObjectTypeGUID" Type="nvarchar(max)" Mode="In" />
+    <Parameter Name="ObjectName" Type="nvarchar(max)" Mode="In" />
+    <Parameter Name="responseMessage" Type="nvarchar(max)" Mode="InOut" />
+  </Function>
+  <Function Name="usp_EditRoomDetails" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="RoomGUID" Type="nvarchar(max)" Mode="In" />
+    <Parameter Name="RoomName" Type="nvarchar(max)" Mode="In" />
+    <Parameter Name="responseMessage" Type="nvarchar(max)" Mode="InOut" />
+  </Function>
+  <Function Name="usp_EditRoomsHouse" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="RoomGUID" Type="nvarchar(max)" Mode="In" />
+    <Parameter Name="HouseGUID" Type="nvarchar(max)" Mode="In" />
+    <Parameter Name="responseMessage" Type="nvarchar(max)" Mode="InOut" />
+  </Function>
+  <Function Name="usp_EditUserDetails" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="UserGUID" Type="nvarchar(max)" Mode="In" />
+    <Parameter Name="UserName" Type="nvarchar(max)" Mode="In" />
+    <Parameter Name="FirstName" Type="nvarchar(max)" Mode="In" />
+    <Parameter Name="LastName" Type="nvarchar(max)" Mode="In" />
+    <Parameter Name="EmailAddress" Type="nvarchar(max)" Mode="In" />
+    <Parameter Name="responseMessage" Type="nvarchar(max)" Mode="InOut" />
+  </Function>
+  <Function Name="usp_EditUserPassword" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="UserGUID" Type="nvarchar(max)" Mode="In" />
+    <Parameter Name="UserPassword" Type="nvarchar(max)" Mode="In" />
+    <Parameter Name="responseMessage" Type="nvarchar(max)" Mode="InOut" />
+  </Function>
+  <Function Name="usp_RemoveOwnerFromHouse" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="UserGUID" Type="nvarchar(max)" Mode="In" />
+    <Parameter Name="HouseGUID" Type="nvarchar(max)" Mode="In" />
+    <Parameter Name="responseMessage" Type="nvarchar(max)" Mode="InOut" />
+  </Function>
+  <Function Name="usp_RemoveOwnerFromRoom" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="UserGUID" Type="nvarchar(max)" Mode="In" />
+    <Parameter Name="RoomGUID" Type="nvarchar(max)" Mode="In" />
+    <Parameter Name="responseMessage" Type="nvarchar(max)" Mode="InOut" />
+  </Function>
+  <Function Name="usp_UserLogin" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="UserName" Type="nvarchar(max)" Mode="In" />
+    <Parameter Name="UserPassword" Type="nvarchar(max)" Mode="In" />
+    <Parameter Name="responseMessage" Type="nvarchar(max)" Mode="InOut" />
+    <Parameter Name="UserGuid" Type="nvarchar(max)" Mode="InOut" />
+  </Function>
+  <Function Name="usp_VerifyEmailAddress" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="UserGUID" Type="nvarchar(max)" Mode="In" />
+    <Parameter Name="responseMessage" Type="nvarchar(max)" Mode="InOut" />
+  </Function>
+  <EntityContainer Name="db_hj13aajModelStoreContainer">
+    <EntitySet Name="tblHouse" EntityType="Self.tblHouse" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tblHouseOwners" EntityType="Self.tblHouseOwners" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tblObjectTypes" EntityType="Self.tblObjectTypes" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tblRoomObjects" EntityType="Self.tblRoomObjects" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tblRoomOwners" EntityType="Self.tblRoomOwners" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tblRooms" EntityType="Self.tblRooms" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tblUsers" EntityType="Self.tblUsers" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK__tblHouseO__House__1ED998B2" Association="Self.FK__tblHouseO__House__1ED998B2">
+      <End Role="tblHouse" EntitySet="tblHouse" />
+      <End Role="tblHouseOwners" EntitySet="tblHouseOwners" />
+    </AssociationSet>
+    <AssociationSet Name="FK__tblHouseO__UserG__1CF15040" Association="Self.FK__tblHouseO__UserG__1CF15040">
+      <End Role="tblUsers" EntitySet="tblUsers" />
+      <End Role="tblHouseOwners" EntitySet="tblHouseOwners" />
+    </AssociationSet>
+    <AssociationSet Name="FK__tblRoomOb__House__36B12243" Association="Self.FK__tblRoomOb__House__36B12243">
+      <End Role="tblHouse" EntitySet="tblHouse" />
+      <End Role="tblRoomObjects" EntitySet="tblRoomObjects" />
+    </AssociationSet>
+    <AssociationSet Name="FK__tblRoomOw__RoomG__20C1E124" Association="Self.FK__tblRoomOw__RoomG__20C1E124">
+      <End Role="tblRooms" EntitySet="tblRooms" />
+      <End Role="tblRoomOwners" EntitySet="tblRoomOwners" />
+    </AssociationSet>
+    <AssociationSet Name="FK__tblRoomOw__UserG__1FCDBCEB" Association="Self.FK__tblRoomOw__UserG__1FCDBCEB">
+      <End Role="tblUsers" EntitySet="tblUsers" />
+      <End Role="tblRoomOwners" EntitySet="tblRoomOwners" />
+    </AssociationSet>
+    <AssociationSet Name="FK__tblRooms__HouseG__21B6055D" Association="Self.FK__tblRooms__HouseG__21B6055D">
+      <End Role="tblHouse" EntitySet="tblHouse" />
+      <End Role="tblRooms" EntitySet="tblRooms" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tblRoomObjects_tblObjectTypes" Association="Self.FK_tblRoomObjects_tblObjectTypes">
+      <End Role="tblObjectTypes" EntitySet="tblObjectTypes" />
+      <End Role="tblRoomObjects" EntitySet="tblRoomObjects" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tblRoomObjects_tblRooms" Association="Self.FK_tblRoomObjects_tblRooms">
+      <End Role="tblRooms" EntitySet="tblRooms" />
+      <End Role="tblRoomObjects" EntitySet="tblRoomObjects" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="4c976c66b2554b5c9412a9e2de087702" Name="Diagram1" ZoomLevel="74">
+        <EntityTypeShape EntityType="db_hj13aajModel.tblHouse" Width="1.5" PointX="0.75" PointY="5.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="db_hj13aajModel.tblHouseOwner" Width="1.5" PointX="3" PointY="4.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="db_hj13aajModel.tblObjectType" Width="1.5" PointX="3" PointY="11" IsExpanded="true" />
+        <EntityTypeShape EntityType="db_hj13aajModel.tblRoomObject" Width="1.5" PointX="5.25" PointY="7.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="db_hj13aajModel.tblRoomOwner" Width="1.5" PointX="5.25" PointY="4.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="db_hj13aajModel.tblRoom" Width="1.5" PointX="3" PointY="7.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="db_hj13aajModel.tblUser" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
+        <AssociationConnector Association="db_hj13aajModel.FK__tblHouseO__House__1ED998B2" ManuallyRouted="false" />
+        <AssociationConnector Association="db_hj13aajModel.FK__tblRooms__HouseG__21B6055D" ManuallyRouted="false" />
+        <AssociationConnector Association="db_hj13aajModel.FK__tblHouseO__UserG__1CF15040" ManuallyRouted="false" />
+        <AssociationConnector Association="db_hj13aajModel.FK_tblRoomObjects_tblObjectTypes" ManuallyRouted="false" />
+        <AssociationConnector Association="db_hj13aajModel.FK_tblRoomObjects_tblRooms" ManuallyRouted="false" />
+        <AssociationConnector Association="db_hj13aajModel.FK__tblRoomOw__RoomG__20C1E124" ManuallyRouted="false" />
+        <AssociationConnector Association="db_hj13aajModel.FK__tblRoomOw__UserG__1FCDBCEB" ManuallyRouted="false" />
+        <AssociationConnector Association="db_hj13aajModel.FK__tblRoomOb__House__36B12243" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
